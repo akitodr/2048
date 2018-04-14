@@ -65,11 +65,13 @@ public class Board {
     }
 
     public void transpose() {
+        int[][] newBoard = new int[rows][cols];
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                board[y][x] = board[x][y];
+                newBoard[y][x] = board[x][y];
             }
         }
+        board = newBoard;
     }
 
     // Adds a 2 or a 4 on a random available spot

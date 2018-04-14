@@ -68,11 +68,14 @@ public class GameBoard extends View {
     public void up() {
         Log.d("GameBoard", "Swiped: UP");
         board.transpose();
-        //left();
+        left();
         board.transpose();
     }
 
     public void down() {
         Log.d("GameBoard", "Swiped: DOWN");
+        board.transpose();
+        right();
+        board.transpose();
     }
 }
