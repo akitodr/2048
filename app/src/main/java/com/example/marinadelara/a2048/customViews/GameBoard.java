@@ -2,19 +2,12 @@ package com.example.marinadelara.a2048.customViews;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.marinadelara.a2048.Board;
-import com.example.marinadelara.a2048.Utils.OnSwipeListener;
 
 /**
  * Created by 1513 X-MXTI on 13/04/2018.
@@ -23,22 +16,25 @@ import com.example.marinadelara.a2048.Utils.OnSwipeListener;
 public class GameBoard extends View {
     Board board = new Board();
 
+    private int totalScore;
+
     public GameBoard(Context context) {
         super(context);
-        init(context, null);
+        init();
     }
 
     public GameBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        init();
     }
 
     public GameBoard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
+        init();
     }
 
-    private void init(Context context, @Nullable AttributeSet attrs) {
+    private void init() {
+        totalScore = 0;
         board.addRandom();
         board.addRandom();
     }
@@ -55,6 +51,9 @@ public class GameBoard extends View {
         board.moveLeft();
         board.mergeLeft();
         board.moveLeft();
+        //adiciona pontuação aqui
+        totalScore = board.getSum();
+        System.out.println("Score: "+totalScore);
         board.addRandom();
     }
 
@@ -77,5 +76,20 @@ public class GameBoard extends View {
         board.transpose();
         right();
         board.transpose();
+    }
+
+    public void reset() {
+        board.getBoardState().clear();
+        board = new Board();
+        init();
+    }
+
+    public void movementBeforeCurrent() {
+        board.getBoardState().pop();
+        board.setBoard(board.getBoardState().lastElement());
+    }
+
+    public int getTotalScore() {
+        return totalScore;
     }
 }

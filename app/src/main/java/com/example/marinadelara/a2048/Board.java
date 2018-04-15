@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * Created by 1513 X-MXTI on 13/04/2018.
@@ -18,10 +20,12 @@ public class Board {
 
     Paint paint = new Paint();
 
+    private Stack<int[][]> boardState = new Stack<>();
     private final int cols = 4;
     private final int rows = 4;
+    private int sum = 0;
 
-    int[][] board = new int[rows][cols];
+    private int[][] board = new int[rows][cols];
 
     public void moveLeft() {
         for (int y = 0; y < rows; y++) { // Each line
@@ -52,6 +56,7 @@ public class Board {
                 }
             }
         }
+        boardSum();
     }
 
     public void flip() {
@@ -87,8 +92,13 @@ public class Board {
                 randY = rand.nextInt(4);
             } while (board[randY][randX] != 0);
 
+            //10% chance de cair 4
+            //90% chance de cair 2
             int chance = rand.nextInt(10);
             board[randY][randX] = chance == 0 ? 4 : 2;
+            //salvar board aqui
+            boardState.push(board);
+            //System.out.println("Size of Board State: "+ boardState.size());
         }
     }
 
@@ -113,6 +123,14 @@ public class Board {
         }
     }
 
+    private void boardSum() {
+        sum = 0;
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                sum += board[y][x];
+            }
+        }
+    }
 
     // For console printing
     public String toString() {
@@ -124,5 +142,17 @@ public class Board {
             text += "\n";
         }
         return text;
+    }
+
+    public Stack<int[][]> getBoardState() {
+        return boardState;
+    }
+
+    public void setBoard(int[][] board) {
+        this.board = board;
+    }
+
+    public int getSum() {
+        return sum;
     }
 }
