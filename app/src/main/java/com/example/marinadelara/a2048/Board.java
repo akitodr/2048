@@ -28,6 +28,10 @@ public class Board {
 
     public Board() {}
 
+    public Board(Board copy) {
+        setBoard(copy.board);
+    }
+
     public void moveLeft() {
         for (int y = 0; y < rows; y++) { // Each line
             int[] line = new int[cols];

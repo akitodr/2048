@@ -50,15 +50,16 @@ public class GameBoard extends View {
 
     public void left() {
         Log.d("GameBoard", "Swiped: LEFT");
-
-        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        Board auxBoard = new Board(board);
 
         board.moveLeft();
         board.mergeLeft();
         board.moveLeft();
 
-        if(previousBoard.getBoard() != board.getBoard())
+        if(auxBoard.getBoard() != board.getBoard()) {
             board.addRandom();
+            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        }
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
@@ -67,8 +68,7 @@ public class GameBoard extends View {
 
     public void right() {
         Log.d("GameBoard", "Swiped: RIGHT");
-
-        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        Board auxBoard = new Board(board);
 
         board.flip();
 
@@ -78,8 +78,10 @@ public class GameBoard extends View {
 
         board.flip();
 
-        if(previousBoard.getBoard() != board.getBoard())
+        if(auxBoard.getBoard() != board.getBoard()) {
             board.addRandom();
+            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        }
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
@@ -88,8 +90,7 @@ public class GameBoard extends View {
 
     public void up() {
         Log.d("GameBoard", "Swiped: UP");
-
-        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        Board auxBoard = new Board(board);
 
         board.transpose();
 
@@ -99,8 +100,10 @@ public class GameBoard extends View {
 
         board.transpose();
 
-        if(previousBoard.getBoard() != board.getBoard())
+        if(auxBoard.getBoard() != board.getBoard()) {
             board.addRandom();
+            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        }
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
@@ -109,8 +112,7 @@ public class GameBoard extends View {
 
     public void down() {
         Log.d("GameBoard", "Swiped: DOWN");
-
-        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        Board auxBoard = new Board(board);
 
         board.transpose();
         board.flip();
@@ -122,8 +124,10 @@ public class GameBoard extends View {
         board.flip();
         board.transpose();
 
-        if(previousBoard.getBoard() != board.getBoard())
+        if(auxBoard.getBoard() != board.getBoard()) {
             board.addRandom();
+            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+        }
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
