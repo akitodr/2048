@@ -20,12 +20,17 @@ public class Board {
 
     Paint paint = new Paint();
 
-    private Stack<int[][]> boardState = new Stack<>();
     private final int cols = 4;
     private final int rows = 4;
     private int sum = 0;
 
     private int[][] board = new int[rows][cols];
+
+    public Board() {}
+
+    public Board(Board copy) {
+        setBoard(copy.board);
+    }
 
     public void moveLeft() {
         for (int y = 0; y < rows; y++) { // Each line
@@ -47,7 +52,7 @@ public class Board {
                 if (board[y][x] != 0) {
                     for (int i = x + 1; i < cols; i++) {
                         if (board[y][i] == 0)
-                            continue;
+                            break;
                         if (board[y][i] != board[y][x])
                             break;
                         board[y][x] += board[y][i];
@@ -96,9 +101,6 @@ public class Board {
             //90% chance de cair 2
             int chance = rand.nextInt(10);
             board[randY][randX] = chance == 0 ? 4 : 2;
-            //salvar board aqui
-            boardState.push(board);
-            //System.out.println("Size of Board State: "+ boardState.size());
         }
     }
 
@@ -144,12 +146,14 @@ public class Board {
         return text;
     }
 
-    public Stack<int[][]> getBoardState() {
-        return boardState;
+    public int[][] getBoard() {
+        return board;
     }
 
     public void setBoard(int[][] board) {
-        this.board = board;
+        for (int y = 0; y < rows; y++)
+            for (int x = 0; x < cols; x++)
+                this.board[y][x] = board[y][x];
     }
 
     public int getSum() {
