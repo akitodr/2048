@@ -15,6 +15,7 @@ import com.example.marinadelara.a2048.Board;
 
 public class GameBoard extends View {
     Board board = new Board();
+    Board previousBoard = new Board();
 
     private int totalScore;
 
@@ -37,6 +38,7 @@ public class GameBoard extends View {
         totalScore = 0;
         board.addRandom();
         board.addRandom();
+        previousBoard.setBoard(board.getBoard());
     }
 
     @Override
@@ -48,45 +50,94 @@ public class GameBoard extends View {
 
     public void left() {
         Log.d("GameBoard", "Swiped: LEFT");
+
+        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+
         board.moveLeft();
         board.mergeLeft();
         board.moveLeft();
+
+        if(previousBoard.getBoard() != board.getBoard())
+            board.addRandom();
+
         //adiciona pontuação aqui
         totalScore = board.getSum();
         System.out.println("Score: "+totalScore);
-        board.addRandom();
     }
 
     public void right() {
         Log.d("GameBoard", "Swiped: RIGHT");
+
+        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+
         board.flip();
-        left();
+
+        board.moveLeft();
+        board.mergeLeft();
+        board.moveLeft();
+
         board.flip();
+
+        if(previousBoard.getBoard() != board.getBoard())
+            board.addRandom();
+
+        //adiciona pontuação aqui
+        totalScore = board.getSum();
+        System.out.println("Score: " + totalScore);
     }
 
     public void up() {
         Log.d("GameBoard", "Swiped: UP");
+
+        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+
         board.transpose();
-        left();
+
+        board.moveLeft();
+        board.mergeLeft();
+        board.moveLeft();
+
         board.transpose();
+
+        if(previousBoard.getBoard() != board.getBoard())
+            board.addRandom();
+
+        //adiciona pontuação aqui
+        totalScore = board.getSum();
+        System.out.println("Score: "+totalScore);
     }
 
     public void down() {
         Log.d("GameBoard", "Swiped: DOWN");
+
+        previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+
         board.transpose();
-        right();
+        board.flip();
+
+        board.moveLeft();
+        board.mergeLeft();
+        board.moveLeft();
+
+        board.flip();
         board.transpose();
+
+        if(previousBoard.getBoard() != board.getBoard())
+            board.addRandom();
+
+        //adiciona pontuação aqui
+        totalScore = board.getSum();
+        System.out.println("Score: "+totalScore);
     }
 
     public void reset() {
-        board.getBoardState().clear();
         board = new Board();
         init();
     }
 
     public void movementBeforeCurrent() {
-        board.getBoardState().pop();
-        board.setBoard(board.getBoardState().lastElement());
+        Log.d("", "going to previous board");
+        board.setBoard(previousBoard.getBoard());
     }
 
     public int getTotalScore() {

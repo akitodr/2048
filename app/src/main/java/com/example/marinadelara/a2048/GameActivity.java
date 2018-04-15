@@ -49,10 +49,7 @@ public class GameActivity extends AppCompatActivity {
         });
         //--end Button
 
-        //Score
-        scoreText = findViewById(R.id.scoreText);
-        System.out.println(gameBoard.getTotalScore());
-        scoreText.append(" " + String.valueOf(gameBoard.getTotalScore()));
+
     }
 
     @Override
@@ -78,6 +75,11 @@ public class GameActivity extends AppCompatActivity {
                     gameBoard.right();
                     break;
             }
+
+            //Score
+            scoreText = findViewById(R.id.scoreText);
+            System.out.println(gameBoard.getTotalScore());
+            scoreText.setText("Score: " + String.valueOf(gameBoard.getTotalScore()));
 
             return super.onSwipe(direction);
         }
