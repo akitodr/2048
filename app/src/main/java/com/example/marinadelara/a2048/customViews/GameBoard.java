@@ -14,27 +14,29 @@ import com.example.marinadelara.a2048.Board;
  */
 
 public class GameBoard extends View {
-    Board board = new Board();
+    Board board;
     Board previousBoard = new Board();
 
     private int totalScore;
 
     public GameBoard(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public GameBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public GameBoard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(@Nullable Context context) {
+        board = new Board(context);
+
         totalScore = 0;
         board.addRandom();
         board.addRandom();
@@ -56,9 +58,9 @@ public class GameBoard extends View {
         board.mergeLeft();
         board.moveLeft();
 
-        if(auxBoard.getBoard() != board.getBoard()) {
+        if(!board.equals(auxBoard)) {
             board.addRandom();
-            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+            previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
 
         //adiciona pontuação aqui
@@ -78,9 +80,9 @@ public class GameBoard extends View {
 
         board.flip();
 
-        if(auxBoard.getBoard() != board.getBoard()) {
+        if(!board.equals(auxBoard)) {
             board.addRandom();
-            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+            previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
 
         //adiciona pontuação aqui
@@ -100,9 +102,9 @@ public class GameBoard extends View {
 
         board.transpose();
 
-        if(auxBoard.getBoard() != board.getBoard()) {
+        if(!board.equals(auxBoard)) {
             board.addRandom();
-            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+            previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
 
         //adiciona pontuação aqui
@@ -124,9 +126,9 @@ public class GameBoard extends View {
         board.flip();
         board.transpose();
 
-        if(auxBoard.getBoard() != board.getBoard()) {
+        if(!board.equals(auxBoard)) {
             board.addRandom();
-            previousBoard.setBoard(board.getBoard());  // Saves previous board before moving
+            previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
 
         //adiciona pontuação aqui
@@ -136,7 +138,7 @@ public class GameBoard extends View {
 
     public void reset() {
         board = new Board();
-        init();
+        init(null);
     }
 
     public void movementBeforeCurrent() {

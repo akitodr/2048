@@ -4,13 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
+import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
 
 import java.util.Random;
-import java.util.Stack;
+
 
 /**
  * Created by 1513 X-MXTI on 13/04/2018.
@@ -26,7 +24,19 @@ public class Board {
 
     private int[][] board = new int[rows][cols];
 
+    private int textColor;
+    private int tileColor;
+
+    Context context;
+
     public Board() {}
+
+    public Board(Context context) {
+        this.context = context;
+
+        textColor = ContextCompat.getColor(context, R.color.textColor);
+        tileColor = ContextCompat.getColor(context, R.color.baseTileColor);
+    }
 
     public Board(Board copy) {
         setBoard(copy.board);
@@ -57,6 +67,7 @@ public class Board {
                             break;
                         board[y][x] += board[y][i];
                         board[y][i] = 0;
+                        break;
                     }
                 }
             }
@@ -113,16 +124,27 @@ public class Board {
     }
 
     public void onDraw(Canvas canvas) {
-        paint.setTextSize(80);
-        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(100);
 
         float w = canvas.getWidth() / cols;
 
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                canvas.drawText(String.valueOf(board[y][x]), x * w + w / 2, y * w + w / 2, paint);
+                if(board[y][x] != 0) {
+                    paint.setColor(tileColor);
+                    canvas.drawRoundRect(x * w, y * w, x * w + w, y * w + w, 20, 20, paint);
+                    paint.setColor(textColor);
+                    drawTextCentered(canvas, paint, String.valueOf(board[y][x]), x * w + w / 2, y * w + w / 2);
+                }
             }
         }
+    }
+
+    // TODO: move this to an utility class
+    private void drawTextCentered(Canvas canvas, Paint paint, String text, float cx, float cy){
+        Rect textBounds = new Rect();
+        paint.getTextBounds(text, 0, text.length(), textBounds);
+        canvas.drawText(text, cx - textBounds.exactCenterX(), cy - textBounds.exactCenterY(), paint);
     }
 
     private void boardSum() {
@@ -132,6 +154,14 @@ public class Board {
                 sum += board[y][x];
             }
         }
+    }
+
+    public boolean equals(Board other) {
+        for (int y = 0; y < rows; y++)
+            for (int x = 0; x < cols; x++)
+                if(board[y][x] != other.board[y][x])
+                    return false;
+        return true;
     }
 
     // For console printing

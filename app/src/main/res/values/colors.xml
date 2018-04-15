@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="textColor">#776e65</color>
     <color name="menuBgColor">#edc53f</color>
+    <color name="baseTileColor">#eee4da</color>
 </resources>
