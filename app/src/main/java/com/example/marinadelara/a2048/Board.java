@@ -47,6 +47,26 @@ public class Board {
         paint.setTextSize(100);
         paint.setTypeface(font);
     }
+  
+    private int textColorDark;
+    private int textColorLight;
+    private int boardColor;
+    private Typeface font;
+
+    Context context;
+
+
+    public Board(Context context) {
+        this.context = context;
+
+        textColorDark = ContextCompat.getColor(context, R.color.textColorDark);
+        textColorLight = ContextCompat.getColor(context, R.color.textColorLight);
+        boardColor = ContextCompat.getColor(context, R.color.boardColor);
+        font = ResourcesCompat.getFont(context, R.font.clearsans_bold);
+
+        paint.setTextSize(100);
+        paint.setTypeface(font);
+    }
 
     public Board(Board copy) {
         setBoard(copy.board);
@@ -77,6 +97,8 @@ public class Board {
                             break;
                         board[y][x] += board[y][i];
                         board[y][i] = 0;
+
+                        sum += board[y][x];
                         break;
                     }
                 }
@@ -202,6 +224,11 @@ public class Board {
 
     public int getSum() {
         return sum;
+    }
+
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 
     // Porco
