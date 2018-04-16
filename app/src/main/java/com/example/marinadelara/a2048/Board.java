@@ -23,10 +23,14 @@ public class Board {
 
     private final int cols = 4;
     private final int rows = 4;
-    private int sum = 0;
+    private int sum;
 
     private int[][] board = new int[rows][cols];
 
+    public Board() {
+        sum = 0;
+    }
+  
     private int textColorDark;
     private int textColorLight;
     private int boardColor;
@@ -34,7 +38,6 @@ public class Board {
 
     Context context;
 
-    public Board() {}
 
     public Board(Context context) {
         this.context = context;
@@ -77,12 +80,13 @@ public class Board {
                             break;
                         board[y][x] += board[y][i];
                         board[y][i] = 0;
+
+                        sum += board[y][x];
                         break;
                     }
                 }
             }
         }
-        boardSum();
     }
 
     public void flip() {
@@ -118,8 +122,6 @@ public class Board {
                 randY = rand.nextInt(4);
             } while (board[randY][randX] != 0);
 
-            //10% chance de cair 4
-            //90% chance de cair 2
             int chance = rand.nextInt(10);
             board[randY][randX] = chance == 0 ? 4 : 2;
         }
@@ -203,6 +205,9 @@ public class Board {
     public int getSum() {
         return sum;
     }
+
+    public void setSum(int sum) {
+        this.sum = sum;
 
     // Porco
     int getTileColor(int value) {
