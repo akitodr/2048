@@ -3,7 +3,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="textColor">#776e65</color>
     <color name="menuBgColor">#edc53f</color>
-    <color name="baseTileColor">#eee4da</color>
+    <color name="boardColor">#bbada0</color>
+
+    <color name="textColorDark">#776e65</color>
+    <color name="textColorLight">#f9f6f2</color>
+
+    <color name="emptyTileColor">#cdc1b4</color>
+    <color name="tile2Color">#eee4da</color>
+    <color name="tile4Color">#ede0c8</color>
+    <color name="tile8Color">#f2b179</color>
+    <color name="tile16Color">#f59563</color>
+    <color name="tile32Color">#f67c5f</color>
+    <color name="tile64Color">#f65e3b</color>
+    <color name="tile128Color">#edcf72</color>
+    <color name="tile256Color">#edcc61</color>
+    <color name="tile512Color">#edc850</color>
+    <color name="tile1024Color">#edc850</color>
+    <color name="tile2048Color">#edc22e</color>
 </resources>

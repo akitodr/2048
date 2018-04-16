@@ -1,11 +1,14 @@
 package com.example.marinadelara.a2048;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 
 import java.util.Random;
 
@@ -24,8 +27,10 @@ public class Board {
 
     private int[][] board = new int[rows][cols];
 
-    private int textColor;
-    private int tileColor;
+    private int textColorDark;
+    private int textColorLight;
+    private int boardColor;
+    private Typeface font;
 
     Context context;
 
@@ -34,8 +39,13 @@ public class Board {
     public Board(Context context) {
         this.context = context;
 
-        textColor = ContextCompat.getColor(context, R.color.textColor);
-        tileColor = ContextCompat.getColor(context, R.color.baseTileColor);
+        textColorDark = ContextCompat.getColor(context, R.color.textColorDark);
+        textColorLight = ContextCompat.getColor(context, R.color.textColorLight);
+        boardColor = ContextCompat.getColor(context, R.color.boardColor);
+        font = ResourcesCompat.getFont(context, R.font.clearsans_bold);
+
+        paint.setTextSize(100);
+        paint.setTypeface(font);
     }
 
     public Board(Board copy) {
@@ -124,18 +134,22 @@ public class Board {
     }
 
     public void onDraw(Canvas canvas) {
-        paint.setTextSize(100);
+        float offSetPercentage = 3;
+        float inOffset = (canvas.getWidth() * offSetPercentage) / 100; // 5%
+        float w = (canvas.getWidth() - inOffset) / cols;
 
-        float w = canvas.getWidth() / cols;
+        paint.setColor(boardColor);
+        canvas.drawRoundRect(0, 0, canvas.getWidth(), canvas.getWidth(), 20, 20, paint);
 
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                if(board[y][x] != 0) {
-                    paint.setColor(tileColor);
-                    canvas.drawRoundRect(x * w, y * w, x * w + w, y * w + w, 20, 20, paint);
-                    paint.setColor(textColor);
-                    drawTextCentered(canvas, paint, String.valueOf(board[y][x]), x * w + w / 2, y * w + w / 2);
-                }
+                    paint.setColor(getTileColor(board[y][x]));
+                    canvas.drawRoundRect((x * w) + inOffset, (y * w) + inOffset, (x * w + w), (y * w + w), 20, 20, paint);
+
+                    if(board[y][x] != 0) {
+                        paint.setColor(board[y][x] >= 8 ? textColorLight : textColorDark);
+                        drawTextCentered(canvas, paint, String.valueOf(board[y][x]), x * w + (w + inOffset) / 2, y * w + (w + inOffset) / 2);
+                    }
             }
         }
     }
@@ -188,5 +202,36 @@ public class Board {
 
     public int getSum() {
         return sum;
+    }
+
+    // Porco
+    int getTileColor(int value) {
+        switch (value) {
+            case 0:
+                return ContextCompat.getColor(context, R.color.emptyTileColor);
+            case 2:
+                return ContextCompat.getColor(context, R.color.tile2Color);
+            case 4:
+                return ContextCompat.getColor(context, R.color.tile4Color);
+            case 8:
+                return ContextCompat.getColor(context, R.color.tile8Color);
+            case 16:
+                return ContextCompat.getColor(context, R.color.tile16Color);
+            case 32:
+                return ContextCompat.getColor(context, R.color.tile32Color);
+            case 64:
+                return ContextCompat.getColor(context, R.color.tile64Color);
+            case 128:
+                return ContextCompat.getColor(context, R.color.tile128Color);
+            case 256:
+                return ContextCompat.getColor(context, R.color.tile256Color);
+            case 512:
+                return ContextCompat.getColor(context, R.color.tile512Color);
+            case 1024:
+                return ContextCompat.getColor(context, R.color.tile1024Color);
+            case 2048:
+                return ContextCompat.getColor(context, R.color.tile2048Color);
+        }
+        return 0;
     }
 }

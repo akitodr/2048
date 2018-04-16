@@ -17,6 +17,8 @@ public class GameBoard extends View {
     Board board;
     Board previousBoard = new Board();
 
+    Context context;
+
     private int totalScore;
 
     public GameBoard(Context context) {
@@ -35,6 +37,7 @@ public class GameBoard extends View {
     }
 
     private void init(@Nullable Context context) {
+        this.context = context;
         board = new Board(context);
 
         totalScore = 0;
@@ -138,7 +141,7 @@ public class GameBoard extends View {
 
     public void reset() {
         board = new Board();
-        init(null);
+        init(context);
     }
 
     public void movementBeforeCurrent() {
