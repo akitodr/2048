@@ -27,6 +27,13 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        View decorView = getWindow().getDecorView();
+        int opt = View.SYSTEM_UI_FLAG_FULLSCREEN|
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(opt);
+        getSupportActionBar().hide();
+
         gestureDetector = new GestureDetector(this, new SwipeListener());
         gameBoard = findViewById(R.id.gameBoard);
 
