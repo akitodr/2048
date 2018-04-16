@@ -47,26 +47,6 @@ public class Board {
         paint.setTextSize(100);
         paint.setTypeface(font);
     }
-  
-    private int textColorDark;
-    private int textColorLight;
-    private int boardColor;
-    private Typeface font;
-
-    Context context;
-
-
-    public Board(Context context) {
-        this.context = context;
-
-        textColorDark = ContextCompat.getColor(context, R.color.textColorDark);
-        textColorLight = ContextCompat.getColor(context, R.color.textColorLight);
-        boardColor = ContextCompat.getColor(context, R.color.boardColor);
-        font = ResourcesCompat.getFont(context, R.font.clearsans_bold);
-
-        paint.setTextSize(100);
-        paint.setTypeface(font);
-    }
 
     public Board(Board copy) {
         setBoard(copy.board);
