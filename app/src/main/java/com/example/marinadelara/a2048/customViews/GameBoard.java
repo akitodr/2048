@@ -63,7 +63,7 @@ public class GameBoard extends View {
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
-        System.out.println("Score: "+totalScore);
+       // System.out.println("Score: "+totalScore);
     }
 
     public void right() {
@@ -85,7 +85,6 @@ public class GameBoard extends View {
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
-        System.out.println("Score: " + totalScore);
     }
 
     public void up() {
@@ -107,7 +106,6 @@ public class GameBoard extends View {
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
-        System.out.println("Score: "+totalScore);
     }
 
     public void down() {
@@ -131,10 +129,11 @@ public class GameBoard extends View {
 
         //adiciona pontuação aqui
         totalScore = board.getSum();
-        System.out.println("Score: "+totalScore);
     }
 
     public void reset() {
+        totalScore = 0;
+        System.out.println(totalScore);
         board = new Board();
         init();
     }

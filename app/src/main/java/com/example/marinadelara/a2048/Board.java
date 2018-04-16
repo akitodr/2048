@@ -22,11 +22,13 @@ public class Board {
 
     private final int cols = 4;
     private final int rows = 4;
-    private int sum = 0;
+    private int sum;
 
     private int[][] board = new int[rows][cols];
 
-    public Board() {}
+    public Board() {
+        sum = 0;
+    }
 
     public Board(Board copy) {
         setBoard(copy.board);
@@ -57,11 +59,11 @@ public class Board {
                             break;
                         board[y][x] += board[y][i];
                         board[y][i] = 0;
+                        sum += board[y][x];
                     }
                 }
             }
         }
-        boardSum();
     }
 
     public void flip() {
@@ -97,8 +99,6 @@ public class Board {
                 randY = rand.nextInt(4);
             } while (board[randY][randX] != 0);
 
-            //10% chance de cair 4
-            //90% chance de cair 2
             int chance = rand.nextInt(10);
             board[randY][randX] = chance == 0 ? 4 : 2;
         }
@@ -121,15 +121,6 @@ public class Board {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 canvas.drawText(String.valueOf(board[y][x]), x * w + w / 2, y * w + w / 2, paint);
-            }
-        }
-    }
-
-    private void boardSum() {
-        sum = 0;
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                sum += board[y][x];
             }
         }
     }
@@ -158,5 +149,9 @@ public class Board {
 
     public int getSum() {
         return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 }
