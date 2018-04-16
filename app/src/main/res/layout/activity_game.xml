@@ -4,17 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/menuBgColor"
+    android:background="@color/gameBgColor"
     tools:context="com.example.marinadelara.a2048.GameActivity">
 
     <com.example.marinadelara.a2048.customViews.GameBoard
         android:id="@+id/gameBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14999998" />
 
     <ImageButton
         android:id="@+id/revertButton"
@@ -27,12 +34,12 @@
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/gameBoard"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gameBoard"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <ImageButton
@@ -51,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.85"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
 
     <TextView
@@ -63,12 +70,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/clearsans_bold"
-        android:textSize="24sp"
+        android:text="@string/score"
         android:textAlignment="center"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gameBoard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.7" />
 
 </android.support.constraint.ConstraintLayout>

@@ -6,6 +6,8 @@
     <color name="menuBgColor">#edc53f</color>
     <color name="boardColor">#bbada0</color>
 
+    <color name="gameBgColor">#faf8ef</color>
+
     <color name="textColorDark">#776e65</color>
     <color name="textColorLight">#f9f6f2</color>
 
