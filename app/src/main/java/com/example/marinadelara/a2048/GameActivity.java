@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.marinadelara.a2048.Utils.OnSwipeListener;
+import com.example.marinadelara.a2048.Utils.SoundPlayer;
 import com.example.marinadelara.a2048.customViews.GameBoard;
 import com.example.marinadelara.a2048.customViews.PopView;
 
@@ -25,6 +26,8 @@ public class GameActivity extends AppCompatActivity implements Serializable{
     GameBoard gameBoard;
     ImageButton revertButton, resetButton;
     TextView scoreText;
+
+    SoundPlayer soundPlayer = new SoundPlayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +64,8 @@ public class GameActivity extends AppCompatActivity implements Serializable{
         });
         //--end Button
 
-
+        soundPlayer.loadMusic(getAssets(), "music.mp3");
+        soundPlayer.playMusic();
     }
 
     @Override

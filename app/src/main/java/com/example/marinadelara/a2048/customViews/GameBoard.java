@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.marinadelara.a2048.Board;
+import com.example.marinadelara.a2048.Utils.SoundPlayer;
 
 import java.io.Serializable;
 
@@ -18,6 +19,9 @@ import java.io.Serializable;
 public class GameBoard extends View implements Serializable {
     Board board;
     Board previousBoard = new Board();
+
+    SoundPlayer soundPlayer = new SoundPlayer();
+    int clickSound;
 
     Context context;
 
@@ -46,6 +50,8 @@ public class GameBoard extends View implements Serializable {
         board.addRandom();
         board.addRandom();
         previousBoard.setBoard(board.getBoard());
+
+        clickSound = soundPlayer.loadSoundEffect(context.getAssets(), "click.wav");
     }
 
     @Override
@@ -64,6 +70,7 @@ public class GameBoard extends View implements Serializable {
         board.moveLeft();
 
         if(!board.equals(auxBoard)) {
+            soundPlayer.playSoundEffect(clickSound);
             board.addRandom();
             previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
@@ -86,6 +93,7 @@ public class GameBoard extends View implements Serializable {
         board.flip();
 
         if(!board.equals(auxBoard)) {
+            soundPlayer.playSoundEffect(clickSound);
             board.addRandom();
             previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
@@ -107,6 +115,7 @@ public class GameBoard extends View implements Serializable {
         board.transpose();
 
         if(!board.equals(auxBoard)) {
+            soundPlayer.playSoundEffect(clickSound);
             board.addRandom();
             previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
@@ -130,6 +139,7 @@ public class GameBoard extends View implements Serializable {
         board.transpose();
 
         if(!board.equals(auxBoard)) {
+            soundPlayer.playSoundEffect(clickSound);
             board.addRandom();
             previousBoard.setBoard(auxBoard.getBoard());  // Saves previous board before moving
         }
