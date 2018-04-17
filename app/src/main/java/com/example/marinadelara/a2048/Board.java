@@ -10,6 +10,8 @@ import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
+import com.example.marinadelara.a2048.Utils.SoundPlayer;
+
 import java.util.Random;
 
 
@@ -46,6 +48,7 @@ public class Board {
 
         paint.setTextSize(100);
         paint.setTypeface(font);
+        paint.setAntiAlias(true);
     }
 
     public Board(Board copy) {
@@ -149,6 +152,7 @@ public class Board {
                     canvas.drawRoundRect((x * w) + inOffset, (y * w) + inOffset, (x * w + w), (y * w + w), 20, 20, paint);
 
                     if(board[y][x] != 0) {
+                        setTextSizeForWidth(paint, w/2, String.valueOf(board[y][x]));
                         paint.setColor(board[y][x] >= 8 ? textColorLight : textColorDark);
                         drawTextCentered(canvas, paint, String.valueOf(board[y][x]), x * w + (w + inOffset) / 2, y * w + (w + inOffset) / 2);
                     }
@@ -161,6 +165,23 @@ public class Board {
         Rect textBounds = new Rect();
         paint.getTextBounds(text, 0, text.length(), textBounds);
         canvas.drawText(text, cx - textBounds.exactCenterX(), cy - textBounds.exactCenterY(), paint);
+    }
+
+    private static void setTextSizeForWidth(Paint paint, float desiredWidth, String text) {
+        final float testTextSize = 100f;
+
+        // Get the bounds of the text, using our testTextSize.
+        paint.setTextSize(testTextSize);
+        Rect bounds = new Rect();
+        paint.getTextBounds(text, 0, text.length(), bounds);
+
+        // Calculate the desired size as a proportion of our testTextSize.
+        float desiredTextSize = testTextSize * desiredWidth / bounds.width();
+        if(desiredTextSize > 120)
+            desiredTextSize = 120;
+
+        // Set the paint for that size.
+        paint.setTextSize(desiredTextSize);
     }
 
     private void boardSum() {
