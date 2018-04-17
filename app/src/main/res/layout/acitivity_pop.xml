@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gameBgColor">
+
+    <TextView
+        android:id="@+id/newGameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/clearsans_bold"
+        android:text="@string/newGame"
+        android:textAlignment="center"
+        android:textColor="@color/textColorDark"
+        android:textSize="42sp" />
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newGameText"
+        android:layout_alignStart="@+id/newGameText"
+        android:layout_below="@+id/newGameText"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/clearsans_regular"
+        android:textAlignment="center"
+        android:textColor="@color/textColorDark"
+        android:textSize="36sp"
+        android:text="Sim" />
+
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/yesButton"
+        android:layout_alignEnd="@+id/newGameText"
+        android:layout_alignRight="@+id/newGameText"
+        android:fontFamily="@font/clearsans_regular"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textColor="@color/textColorDark"
+        android:background="@android:color/transparent"
+        android:text="Não" />
+</RelativeLayout>
