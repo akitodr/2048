@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
+import java.io.Serializable;
 import java.util.Random;
 
 
@@ -17,7 +18,7 @@ import java.util.Random;
  * Created by 1513 X-MXTI on 13/04/2018.
  */
 
-public class Board {
+public class Board implements Serializable{
 
     Paint paint = new Paint();
 

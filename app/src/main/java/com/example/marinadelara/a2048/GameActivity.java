@@ -1,6 +1,7 @@
 package com.example.marinadelara.a2048;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -11,12 +12,14 @@ import android.widget.TextView;
 
 import com.example.marinadelara.a2048.Utils.OnSwipeListener;
 import com.example.marinadelara.a2048.customViews.GameBoard;
+import com.example.marinadelara.a2048.customViews.PopView;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements Serializable{
 
     GestureDetector gestureDetector;
     GameBoard gameBoard;
@@ -44,7 +47,9 @@ public class GameActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameBoard.reset();
+                Intent intent = new Intent(GameActivity.this, PopView.class);
+//                intent.putExtra("board",gameBoard);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -57,6 +62,13 @@ public class GameActivity extends AppCompatActivity {
         //--end Button
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1)
+            gameBoard.reset();
     }
 
     @Override

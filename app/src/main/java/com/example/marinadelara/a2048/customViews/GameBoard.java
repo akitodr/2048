@@ -9,11 +9,13 @@ import android.view.View;
 
 import com.example.marinadelara.a2048.Board;
 
+import java.io.Serializable;
+
 /**
  * Created by 1513 X-MXTI on 13/04/2018.
  */
 
-public class GameBoard extends View {
+public class GameBoard extends View implements Serializable {
     Board board;
     Board previousBoard = new Board();
 
@@ -138,6 +140,7 @@ public class GameBoard extends View {
 
     public void reset() {
         totalScore = 0;
+        board.setSum(0);
         System.out.println(totalScore);
         board = new Board();
         init(context);
