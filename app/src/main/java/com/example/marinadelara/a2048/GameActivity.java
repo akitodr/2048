@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.marinadelara.a2048.Utils.OnSwipeListener;
 import com.example.marinadelara.a2048.customViews.GameBoard;
+import com.example.marinadelara.a2048.customViews.GameOver;
 import com.example.marinadelara.a2048.customViews.PopView;
 
 import java.io.Serializable;
@@ -31,11 +32,8 @@ public class GameActivity extends AppCompatActivity implements Serializable{
         setContentView(R.layout.activity_game);
 
         View decorView = getWindow().getDecorView();
-        int opt = View.SYSTEM_UI_FLAG_FULLSCREEN|
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        int opt = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(opt);
-        getSupportActionBar().hide();
 
         gestureDetector = new GestureDetector(this, new SwipeListener());
         gameBoard = findViewById(R.id.gameBoard);
@@ -56,7 +54,9 @@ public class GameActivity extends AppCompatActivity implements Serializable{
         revertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameBoard.movementBeforeCurrent();
+                //gameBoard.movementBeforeCurrent();
+                Intent intent = new Intent(GameActivity.this, GameOver.class);
+                startActivity(intent);
             }
         });
         //--end Button

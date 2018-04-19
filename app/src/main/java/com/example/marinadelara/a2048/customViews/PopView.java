@@ -32,7 +32,7 @@ public class PopView extends Activity {
         int w = displayMetrics.widthPixels;
         int h = displayMetrics.heightPixels;
 
-        getWindow().setLayout((int)(w * 0.8f), (int)(h * 0.8f));
+        getWindow().setLayout((int)(w * 0.8f), (int)(h * 0.45f));
 
         yesButton = findViewById(R.id.yesButton);
         noButton = findViewById(R.id.noButton);

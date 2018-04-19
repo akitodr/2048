@@ -20,11 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView();
-        int opt = View.SYSTEM_UI_FLAG_FULLSCREEN|
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        int opt = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(opt);
-        getSupportActionBar().hide();
 
         playButton = findViewById(R.id.playButton);
 
